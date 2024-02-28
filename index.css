@@ -125,6 +125,13 @@ header {
     justify-content: space-evenly;
 }
 
+.category-items,.items-container{
+    width: 80%;
+    margin: 50px 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
 .sale_item {
     width: 250px;
 }
@@ -169,6 +176,7 @@ header {
 
 .item-container {
     width: 200px;
+    margin: 10px;
 }
 
 .item-image {
