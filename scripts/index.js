@@ -1,5 +1,35 @@
-let itemsContainerElement = document.querySelector('.items-container')//elemetn cha class select kela
+let baagItems;
 
+onLoad(); 
+//web page load zhya wr ky load hoila pahije
+
+function onLoad(){
+    let  baagItemsStr=localStorage.getItem('bagItems');
+    baagItems =baagItemsStr ? JSON.parse(baagItemsStr):[];
+    displayItemsOnHomePage();
+displayBagIcon();
+}
+
+function addToBag(itemId){
+    baagItems.push(itemId)
+    localStorage.setItem('bagItems',JSON.stringify(baagItems));
+    displayBagIcon();
+}
+
+function displayBagIcon(){
+    let bagItemCountElement=document.querySelector('.bag-item-count');
+//bag icon select kela 0 asel tr bag text hiddne hoil add kelya vr disel vr method call keli
+    if(baagItems.length>0){
+        bagItemCountElement.style.visibility='visible';
+
+        bagItemCountElement.innerText=baagItems.length
+     }
+     else{
+        bagItemCountElement.style.visibility='hidden';
+     }
+}
+
+function displayItemsOnHomePage(){let itemsContainerElement = document.querySelector('.items-container')//elemetn cha class select kela
 
 //konta pn item add kelya saglyana style apply zhali pahije 👇
 let innerHTML =''; //empty html dila
@@ -17,8 +47,9 @@ items.forEach(item =>{
         <span class="origonal-price">Rs ${item.origonal_price}</span>
         <span class="discount">(${item.discount_percentage}% OFF)</span>
     </div>
-    <button class="btn-add-bag">Add to Bag</button>
+    <button class="btn-add-bag" onclick="addToBag(${item.id})">Add to Bag</button>
     </div>`
 })
 
 itemsContainerElement.innerHTML = innerHTML;
+}
